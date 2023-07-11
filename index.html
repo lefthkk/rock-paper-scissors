@@ -7,7 +7,32 @@
     <title>Rock,Paper,Scissors</title>
 </head>
 <body>
+    <button id="rock" >Rock</button>
+    <button id="paper">Paper</button>
+    <button id="scissors">Scissors</button>
+    <button id="restart">Restart</button>
+    <br><br><div id="results"></div>
+    <p id="score">Score:</p>
     <script>
+        const rock = document.getElementById('rock');
+        const paper = document.getElementById('paper');
+        const scissors = document.getElementById('scissors');
+        const restart = document.getElementById('restart');
+        const div = document.getElementById('results');
+        let tekst = document.createElement('p');
+        const score = document.getElementById('score');
+        let yscore = 0;
+        let cscore = 0;
+        
+        rock.addEventListener('click',playRound);
+        paper.addEventListener('click',playRound);
+        scissors.addEventListener('click',playRound);
+        restart.addEventListener('click', restartFunc);
+        function restartFunc(){
+                    yscore = 0;
+                    cscore = 0;
+                    score.textContent = `Score: ${yscore} - ${cscore}`;
+        };
         let options;
         function getComputerChoice(){
                 let result = Math.floor(Math.random() * 3 + 1);
@@ -22,39 +47,49 @@
 
                return options;    }
                function playRound(playerSelection,computerSelection){
-        playerSelection = playerSelection[0].toUpperCase() + playerSelection.slice(1)
+        
+        playerSelection =  this.textContent;
+        computerSelection = getComputerChoice();
+        if(yscore >= 5 || cscore >= 5) return;
         if(playerSelection == "Rock" && computerSelection == "Scissors"){
-            return "YOU WİN Rock beats Scissors";
+            div.appendChild(tekst).textContent = "YOU WİN Rock beats Scissors";
+            yscore += 1;
         }
         else if(playerSelection == "Rock" && computerSelection == "Paper"){
-            return "YOU LOSE Paper beats Rock";
+            div.appendChild(tekst).textContent = "YOU LOSE Paper beats Rock";
+            cscore += 1;
         }
         else if(playerSelection == "Scissors" && computerSelection == "Paper"){
-            return "YOU WİN Scissors beats Paper";
+            div.appendChild(tekst).textContent ="YOU WİN Scissors beats Paper";
+            yscore += 1;
         }
         else if(playerSelection == "Scissors" && computerSelection == "Rock"){
-            return "YOU LOSE Rock beats Scissors";
+            div.appendChild(tekst).textContent = "YOU LOSE Rock beats Scissors";
+            cscore += 1;
         }
         else if(playerSelection == "Paper" && computerSelection == "Rock"){
-            return "YOU WİN Paper beats Rock";
+            div.appendChild(tekst).textContent = "YOU WİN Paper beats Rock";
+            yscore += 1;
         }
         else if(playerSelection == "Paper" && computerSelection == "Scissors"){
-            return "YOU LOSE Scissors beats Paper";
+            div.appendChild(tekst).textContent = "YOU LOSE Scissors beats Paper";
+            cscore += 1;
         }
         
         
-        else return "DRAW";
-    }   
+        else div.appendChild(tekst).textContent = "DRAW";
     
-    //const playerSelection = "rock";
-//const computerSelection = getComputerChoice();
-function game(){
-   let x = prompt("Rock, Paper, Scissors?", "");
-    for(let i=1;i <= 5;i++){
-        console.log(playRound(x, getComputerChoice()));
+        
+        
+        score.textContent = `Score: ${yscore} - ${cscore}`;
+        if(yscore == 5) div.appendChild(tekst).textContent = "You Win the computer!!!"; 
+              
+        else if(cscore == 5) div.appendChild(tekst).textContent = "YOU Lose computer win";
+       
+    
+    score.textContent = `Score: ${yscore} - ${cscore}`;
     }
-}
-game();
+
     </script>
 </body>
 </html>
